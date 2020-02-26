@@ -34,7 +34,8 @@ public class Employee {
     private boolean reviewedDeptPolicies;
     private boolean movedIn;
     private String cubeId;
-    private LocalDate orientationDate;
+    private LocalDate orientationDate = LocalDate.now();
+    public String message = null;
 
     public Employee(String firstName, String lastName, String ssn) {
         this.firstName = firstName;
@@ -44,22 +45,38 @@ public class Employee {
 
     // Assume this must be performed first, and assume that an employee
     // would only do this once, upon being hired.
-    public void meetWithHrForBenefitAndSalaryInfo() {
-        metWithHr = true;
+
+
+
+    public void DTformat(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yy");
         String fmtDate = formatter.format(orientationDate);
-        System.out.println(firstName + " " + lastName + " met with HR on "
+        System.out.println(firstName + " " + lastName + message
                 + fmtDate);
+    }
+
+    public void order(){
+        meetWithHrForBenefitAndSalaryInfo();
+        meetDepartmentStaff();
+        reviewDeptPolicies();
+        moveIntoCubicle(cubeId);
+    }
+
+
+    public void meetWithHrForBenefitAndSalaryInfo() {
+        metWithHr = true;
+        message = " met with HR on ";
+        DTformat();
+
     }
 
     // Assume this must be performed second, and assume that an employee
     // would only do this once, upon being hired.
-    public void meetDepartmentStaff() {
+    private void meetDepartmentStaff() {
         metDeptStaff = true;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yy");
-        String fmtDate = formatter.format(orientationDate);
-        System.out.println(firstName + " " + lastName + " met with dept staff on "
-                + fmtDate);
+        message = " met with Department Staff on ";
+        DTformat();
+
     }
 
     // Assume this must be performed third. And assume that because department
@@ -67,10 +84,8 @@ public class Employee {
     // independently from other classes.
     public void reviewDeptPolicies() {
         reviewedDeptPolicies = true;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yy");
-        String fmtDate = formatter.format(orientationDate);
-        System.out.println(firstName + " " + lastName + " reviewed dept policies on "
-                + fmtDate);
+        message = " reviewed dept policies on ";
+        DTformat();
     }
 
     // Assume this must be performed fourth. And assume that because employees
@@ -79,10 +94,9 @@ public class Employee {
     public void moveIntoCubicle(String cubeId) {
         this.cubeId = cubeId;
         this.movedIn = true;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yy");
-        String fmtDate = formatter.format(orientationDate);
-        System.out.println(firstName + " " + lastName + " moved into cubicle "
-                + cubeId + " on " + fmtDate);
+        message = " moved into cubicle " + cubeId + " on ";
+        DTformat();
+
     }
 
     public String getFirstName() {
@@ -91,6 +105,8 @@ public class Employee {
 
     // setter methods give the developer the power to control what data is
     // allowed through validation.
+
+
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;

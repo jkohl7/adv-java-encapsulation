@@ -13,13 +13,82 @@ import java.time.LocalDate;
  */
 public class Employee {
 
-    public String firstName;
-    public String lastName;
-    public String ssn;
-    public boolean metWithHr;
-    public boolean metDeptStaff;
-    public boolean reviewedDeptPolicies;
-    public boolean movedIn;
-    public String cubeId;
-    public LocalDate orientationDate;
+    private String firstName;
+    private String lastName;
+    private String ssn;
+    private boolean metWithHr;
+    private boolean metDeptStaff;
+    private boolean reviewedDeptPolicies;
+    private boolean movedIn;
+    private int cubeId;
+    private LocalDate orientationDate;
+
+
+    public Employee(String firstName, String lastName, String ssn, int cubeId) {
+
+        if(ssn.length() != 9){
+            throw new IllegalArgumentException("This is whack");
+        }
+
+        this.firstName = firstName;
+        this.lastName = lastName;
+
+        this.metWithHr = false;
+        this.metDeptStaff = false;
+        this.reviewedDeptPolicies = false;
+        this.movedIn = false;
+
+    }
+
+    //ways to turn booleans true
+    public void didHrMeeting(){
+        metWithHr = true;
+    }
+    public void didDSMeeting(){
+        metDeptStaff = true;
+    }
+    public void reviewPolicies(){
+        reviewedDeptPolicies = true;
+    }
+    public void movedBelongings(){
+        movedIn = true;
+    }
+
+
+
+
+
+    //setters and getters
+
+    public LocalDate getOrientationDate() {
+        return orientationDate;
+    }
+
+    public void setOrientationDate(LocalDate orientationDate) {
+        this.orientationDate = orientationDate;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getSsn() {
+        return ssn;
+    }
+
+    public void setSsn(String ssn) {
+        this.ssn = ssn;
+    }
 }
